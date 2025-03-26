@@ -1,0 +1,71 @@
+<div class="flex justify-center">
+    <form [formGroup]="FormularioProducto" (ngSubmit)="onSubmit()" class="space-y-4 w-full max-w-lg mt-16">
+        <!--Referencia-->
+        <div>
+            <label for="Referencia" class="block text-sm font-medium text-gray-700">Referencia</label>
+            <input type="number" id="Referencia" formControlName="Referencia" placeholder class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <div *ngIf="FormularioProducto.get('Referencia')?.invalid && FormularioProducto.get('Referencia')?.touched" class="text-red-500 text-sm mt-1">
+                <span *ngIf="FormularioProducto.get('Referencia')?.errors?.['required']">Este campo es obligatorio.</span>
+                <span *ngIf="FormularioProducto.get('Referencia')?.errors?.['min']">El número debe ser mayor a 0.</span>
+                <span *ngIf="FormularioProducto.get('Referencia')?.errors?.['max']">Número demasiado alto.</span>
+            </div>
+        </div>
+        <!--Nombre-->
+        <div>
+            <label for="Nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
+            <input type="text" id="Nombre" formControlName="Nombre" placeholder class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <div *ngIf="FormularioProducto.get('Nombre')?.invalid && FormularioProducto.get('Nombre')?.touched" class="text-red-500 text-sm mt-1">
+                <span *ngIf="FormularioProducto.get('Nombre')?.errors?.['required']">Este campo es obligatorio.</span>
+                <span *ngIf="FormularioProducto.get('Nombre')?.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</span>
+                <span *ngIf="FormularioProducto.get('Nombre')?.errors?.['maxlength']">El nombre es demasiado largo.</span>
+            </div>
+        </div>
+        <!--Precio-->
+        <div>
+            <label for="Precio" class="block text-sm font-medium text-gray-700">Precio</label>
+            <input type="number" id="Precio" formControlName="Precio" placeholder class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <div *ngIf="FormularioProducto.get('Precio')?.invalid && FormularioProducto.get('Precio')?.touched" class="text-red-500 text-sm mt-1">
+                <span *ngIf="FormularioProducto.get('Precio')?.errors?.['required']">Este campo es obligatorio.</span>
+                <span *ngIf="FormularioProducto.get('Precio')?.errors?.['min']">El precio debe ser mayor a 0.</span>
+                <span *ngIf="FormularioProducto.get('Precio')?.errors?.['max']">Precio demasiado alto.</span>
+            </div>
+        </div>
+        <!--Descripcion-->
+        <div>
+            <label for="Descripcion" class="block text-sm font-medium text-gray-700">Descripcion</label>
+            <input type="text" id="Descripcion" formControlName="Descripcion" placeholder class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <div *ngIf="FormularioProducto.get('Descripcion')?.invalid && FormularioProducto.get('Descripcion')?.touched" class="text-red-500 text-sm mt-1">
+                <span *ngIf="FormularioProducto.get('Descripcion')?.errors?.['required']">Este campo es obligatorio.</span>
+                <span *ngIf="FormularioProducto.get('Descripcion')?.errors?.['minlength']">La descripción debe tener al menos 10 caracteres.</span>
+                <span *ngIf="FormularioProducto.get('Descripcion')?.errors?.['maxlength']">La descripción es demasiado larga.</span>
+            </div>
+        </div>
+        <!--TipoProducto-->
+        <div>
+            <label for="TipoProducto" class="block text-sm font-medium text-gray-700">Tipo de producto</label>
+            <select formControlName="TipoProducto" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <option value="Zapatos">Zapatos</option>
+                <option value="Camisetas">Camisetas</option>
+                <option value="Pantalones">Pantalones</option>
+            </select>
+            <div *ngIf="FormularioProducto.get('TipoProducto')?.invalid && FormularioProducto.get('TipoProducto')?.touched" class="text-red-500 text-sm mt-1">
+                <span *ngIf="FormularioProducto.get('TipoProducto')?.errors?.['required']">Este campo es obligatorio.</span>
+            </div>
+        </div>
+        <!--EnOferta-->
+        <div class="flex items-center">
+            <input type="checkbox" formControlName="EnOferta" class="h-4 w-4 text-indigo-600 border-gray-300 rounded">
+            <label for="EnOferta" class="ml-2 block text-sm font-medium text-gray-700">En oferta</label>
+        </div>
+        <!--Imagen-->
+        <div class="form-group">
+            <label for="imagen" class="block text-sm font-medium text-gray-700">Imagen</label>
+            <input type="file" class="form-control mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="imagen" (change)="onFileSelected($event)">
+            <div *ngIf="!imagenUrl && imagenSeleccionada" class="text-red-500 text-sm mt-1">
+                Subiendo imagen, por favor espera...
+            </div>
+            <img *ngIf="imagenUrl" [src]="imagenUrl" alt="Vista previa" class="mt-2 w-36 h-36 object-cover">
+        </div>
+        <button type="submit" [disabled]="FormularioProducto.invalid" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Submit</button>
+    </form>
+</div>
