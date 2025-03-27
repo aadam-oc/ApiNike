@@ -1,13 +1,19 @@
-<div class="product-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
-    <div class="product-card bg-white shadow-md rounded-lg overflow-hidden" *ngFor="let producto of productos">
+<a *ngIf="rol === 'admin'" class="product-button bg-indigo-600 text-white py-2 px-4 rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500 transition duration-300 ease-in-out mt-8" [routerLink]="['/form']">Crear producto</a>
+<div class="product-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-6 bg-gray-50">
+    <div class="product-card bg-white shadow-lg rounded-xl overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out" *ngFor="let producto of productos">
         <!-- Mostrar la imagen del producto -->
         <img class="product-image w-full h-48 object-cover" [src]="producto.ruta_imagen" alt="{{ producto.nombre }}">
 
-        <div class="product-info p-4">
-            <p class="product-title text-lg font-semibold">{{ producto.nombre }}</p>
-            <p class="product-description text-gray-600">{{ producto.descripcion }}</p>
-            <p class="product-price text-xl font-bold text-black">{{ producto.precio }} €</p>
-            <p *ngIf="producto.en_oferta" class="product-offer text-green-500">En oferta</p>
+        <div class="product-info p-6">
+            <p class="product-title text-lg font-semibold text-gray-800">{{ producto.nombre }}</p>
+            <p class="product-description text-gray-600 mt-2">{{ producto.descripcion }}</p>
+            <p class="product-price text-2xl font-bold text-indigo-600 mt-4">{{ producto.precio }} €</p>
+            <p *ngIf="producto.en_oferta" class="product-offer text-green-500 font-medium mt-2">En oferta</p>
+            <p class="product-reference text-gray-500 mt-2">Cantidad: {{ producto.cantidad }}</p>
+        </div>
+        <div class="product-actions flex justify-between items-center p-4">
+            <button *ngIf="rol === 'admin'" class="product-button bg-red-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-500 transition duration-300 ease-in-out" (click)="eliminarProducto(producto.referencia)">Eliminar</button>
+            <button class="product-button bg-indigo-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500 transition duration-300 ease-in-out" (click)="anadirAlCarrito(producto.referencia)">Añadir al carrito</button>
         </div>
     </div>
 </div>

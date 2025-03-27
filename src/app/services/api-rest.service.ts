@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Product } from '../interfaces/product';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class ApiRestService {
   constructor(private http: HttpClient) { }
 
   private apiUrlImagenes = 'http://172.17.131.11:3000'; 
-  private apiUrlProductos = 'http://localhost:3000/nike';
+  private apiUrlProductos = 'http://localhost:3000';
 
   subirImagen(file: File): Observable<{ imageUrl: string }> {
     const formData = new FormData();
@@ -20,21 +21,52 @@ export class ApiRestService {
 
   // Obtener productos desde la API
   getProductos(): Observable<any> {
-    return this.http.get(`${this.apiUrlProductos}/productos`);
+    return this.http.get(`${this.apiUrlProductos}/nike/productos`);
   }
 
   // Añadir producto a la API
-  añadirProducto(producto: any): Observable<any> {
-    return this.http.post(`${this.apiUrlProductos}/productos`, producto);
+  añadirProducto(producto: Product): Observable<any> {
+    return this.http.post(`${this.apiUrlProductos}/nike/productos`, producto);
   }
 
   // Verificar si un producto existe en la API por su referencia
   productoExistente(referencia: string): Observable<boolean> {
-    return this.http.get<boolean>(`${this.apiUrlProductos}/productos/existe/${referencia}`);
+    return this.http.get<boolean>(`${this.apiUrlProductos}/nike/productos/existe/${referencia}`);
   }
 
   // Obtener un producto por su referencia desde la API
   getProductoReferencia(referencia: string): Observable<any> {
-    return this.http.get(`${this.apiUrlProductos}/productos/${referencia}`);
+    return this.http.get(`${this.apiUrlProductos}/nike/productos/${referencia}`);
+  }
+
+  eliminarProducto(referencia: string): Observable<any> {
+    return this.http.delete(`${this.apiUrlProductos}/nike/productos/${referencia}`);
+  }
+
+  anadirAlCarrito(infoCarrito: any): Observable<any> {
+    console.log(infoCarrito);
+    return this.http.post(`${this.apiUrlProductos}/nike/carrito`, infoCarrito);
+  }
+
+  loginUser(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrlProductos}/nike/login`, data, {
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+
+  registerUser(user: any): Observable<any> {
+    return this.http.post(`${this.apiUrlProductos}/nike/register`, user);
+  }
+
+  logoutUser(): Observable<any> {
+    return this.http.post(`${this.apiUrlProductos}/nike/logout`, null);
+  }
+
+  updateUsuario(user: any, id: number): Observable<any> {
+    return this.http.put(`${this.apiUrlProductos}/nike/usuarios/${id}`, user);
+  }
+
+  getCarrito(id_usuario: number): Observable<any> {
+    return this.http.get(`${this.apiUrlProductos}/nike/carrito/${id_usuario}`);
   }
 }

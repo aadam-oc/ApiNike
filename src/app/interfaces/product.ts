@@ -3,9 +3,10 @@ export interface Product {
     nombre: string;
     precio: number;
     descripcion: string;
-    tipoProducto: string;
+    tipo_de_producto: string;
     en_oferta: boolean;
     ruta_imagen: string;
+    cantidad: number;
 }
 
 
