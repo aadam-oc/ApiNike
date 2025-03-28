@@ -43,7 +43,7 @@ export class RegisterComponent {
         next: (response) => {
           console.log('✅ Usuario registrado:', response);
           localStorage.setItem('token', response.token);
-          localStorage.setItem('user_id', response.user_id);
+          localStorage.setItem('id', response.user.id);
           localStorage.setItem('email', response.email);
           localStorage.setItem('rol', response.rol);
           localStorage.setItem('nombre', response.nombre);

@@ -16,12 +16,12 @@ export class CarritoComponent {
   }
 
   ngOnInit() {
-    const id_usuario = Number(localStorage.getItem('id_usuario'));
+    const id = Number(localStorage.getItem('id'));
 
-    this.ApiRestService.getCarrito( id_usuario ).subscribe({
+    this.ApiRestService.getCarrito( id ).subscribe({
       next: (response) => {
         console.log('✅ Carrito:', response);
-        console.log(response.id_usuario);
+        console.log(response.id);
         console.log(response.referencia_producto);
         console.log(response.cantidad);
         this.carrito = response;

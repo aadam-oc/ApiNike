@@ -48,7 +48,7 @@ export class LoginComponent {
       next: (response) => {
         console.log('✅ Login exitoso', response);
         localStorage.setItem('token', response.token);
-        localStorage.setItem('user_id', response.user.id);
+        localStorage.setItem('id', response.user.id);
         localStorage.setItem('email', response.user.correo);
         localStorage.setItem('rol', response.user.rol);
         

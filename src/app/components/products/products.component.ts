@@ -25,11 +25,9 @@ export class ProductsComponent implements OnInit {
   };
 
   anadirAlCarrito(referencia: string): void {
-    localStorage.setItem('id_usuario', '1');
-    const id_usuario = Number(localStorage.getItem('id_usuario')) || '';
     const infoCarrito = {
       referencia: referencia,
-      id_usuario: id_usuario
+      id_usuario: localStorage.getItem('id')
     };
     this.apiService.anadirAlCarrito(infoCarrito).subscribe(() => {
       console.log('Producto añadido al carrito');
@@ -39,10 +37,11 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     if (localStorage.getItem('rol') !== null && localStorage.getItem('rol') !== undefined) {
-          this.rol = localStorage.getItem('rol');
-          
-        }
-  
+      this.rol = localStorage.getItem('rol');
+
+    }
+    console.log('id:prueba', localStorage.getItem('id'));
+
     this.apiService.getProductos().subscribe(data => {
       this.productos = data;
 
