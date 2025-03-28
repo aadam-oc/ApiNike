@@ -13,7 +13,8 @@
         </div>
         <div class="product-actions flex justify-between items-center p-4">
             <button *ngIf="rol === 'admin'" class="product-button bg-red-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-500 transition duration-300 ease-in-out" (click)="eliminarProducto(producto.referencia)">Eliminar</button>
-            <button class="product-button bg-indigo-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500 transition duration-300 ease-in-out" (click)="anadirAlCarrito(producto.referencia)">Añadir al carrito</button>
+            <button *ngIf="rol" class="product-button bg-indigo-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500 transition duration-300 ease-in-out" (click)="anadirAlCarrito(producto.referencia)">Añadir al carrito</button>
+            <a *ngIf="!rol" class="product-button bg-indigo-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500 transition duration-300 ease-in-out" [routerLink]="['/login']">Añadir al carrito</a>
         </div>
     </div>
 </div>

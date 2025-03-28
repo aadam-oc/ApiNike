@@ -1,6 +1,12 @@
-<div *ngFor="let item of carrito">
-    <div class="carrito-item">
-        <p>Referencia: {{ item.referencia_producto }}</p>
-        <p>Cantidad: {{ item.cantidad }}</p>
+<div class="space-y-4">
+    <div *ngFor="let item of carrito" class="carrito-item bg-gray-100 p-4 rounded-lg shadow-md">
+        <p class="text-lg font-semibold text-gray-700">Referencia: {{ item.referencia_producto }}</p>
+        <p class="text-gray-600">Cantidad: {{ item.cantidad }}</p>
     </div>
 </div>
+
+<button 
+    (click)="comprarCarrito()" 
+    class="btn btn-primary mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300">
+    Comprar
+</button>

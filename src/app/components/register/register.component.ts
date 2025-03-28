@@ -44,9 +44,9 @@ export class RegisterComponent {
           console.log('✅ Usuario registrado:', response);
           localStorage.setItem('token', response.token);
           localStorage.setItem('id', response.user.id);
-          localStorage.setItem('email', response.email);
-          localStorage.setItem('rol', response.rol);
-          localStorage.setItem('nombre', response.nombre);
+          localStorage.setItem('email', response.user.email);
+          localStorage.setItem('rol', response.user.rol);
+          localStorage.setItem('nombre', response.user.nombre);
           this.router.navigate(['/login']).catch((err) => {
             console.error('Error al redirigir:', err);
           });

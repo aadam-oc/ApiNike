@@ -3,6 +3,7 @@ import { ApiRestService } from '../../services/api-rest.service';
 import { CommonModule } from '@angular/common';
 import { Carrito } from '../../interfaces/carrito';
 
+
 @Component({
   selector: 'app-carrito',
   imports: [CommonModule],
@@ -10,9 +11,19 @@ import { Carrito } from '../../interfaces/carrito';
   styleUrl: './carrito.component.css'
 })
 export class CarritoComponent {
-  carrito: any;
+  carrito: Carrito[] = [];
   
   constructor(private ApiRestService: ApiRestService) {
+  }
+
+  comprarCarrito() {
+    const id = Number(localStorage.getItem('id'));
+    
+    this.ApiRestService.comprarCarrito(id).subscribe({
+      next: (response) => {
+        console.log('✅ Compra realizada:', response);
+      }
+    });
   }
 
   ngOnInit() {

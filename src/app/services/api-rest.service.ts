@@ -69,4 +69,16 @@ export class ApiRestService {
   getCarrito(id_usuario: number): Observable<any> {
     return this.http.get(`${this.apiUrlProductos}/nike/carrito/${id_usuario}`);
   }
+
+  comprarCarrito(id_usuario: number): Observable<any> {
+    return this.http.post(`${this.apiUrlProductos}/nike/comprar/${id_usuario}`, null);
+  }
+
+  getCompras(id_usuario: number): Observable<any> {
+    return this.http.get(`${this.apiUrlProductos}/nike/compras/${id_usuario}`);
+  }
+
+  getUsuarios(): Observable<any> {
+    return this.http.get(`${this.apiUrlProductos}/nike/usuarios`);
+  }
 }
